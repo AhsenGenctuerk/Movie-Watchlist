@@ -10,7 +10,18 @@ public class Movie {
     // Poster
 
     public Movie(String title) {
-        this.title = title;
+        Movie template = MovieData.DATABASE.get(title);
+        if (template == null) {
+            throw new IllegalArgumentException("Film nicht in Datenbank: " + title);
+        }
+        this.title = template.title;
+        this.genre = template.genre;
+        this.regisseur = template.regisseur;
+        this.author = template.author;
+        this.publicationYear = template.publicationYear;
+        this.description = template.description;
+        this.reviews = "";
+        this.watched = false;
     }
 
     public Movie(String title, String reviews, String genre, String regisseur, String author, int publicationYear, String description) {
